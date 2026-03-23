@@ -36,6 +36,19 @@ Installed automatically by `setup.sh`:
 - `clang-format` — Code formatting/lint checks
 - `git`, `python3`, `python3-pip`, `python3-venv` — Version control, Python runtime, and virtual environments
 
+## Design Proposal Requirement
+
+For any task that is not a bugfix, you MUST first deliver a design proposal describing the proposed changes — including the problem, approach, affected files/repos, and any trade-offs — and discuss it with the user. Do NOT begin implementation until the user has explicitly signed off on the proposal. No code changes, no file creation, no prototyping until approval is given.
+
+Bugfixes do NOT require a proposal and may be implemented directly.
+
+Proposals live in `docs/proposals/` within the relevant repository:
+- `docs/proposals/open/` — active proposals pending discussion or implementation
+- `docs/proposals/completed/` — proposals that have been fully implemented
+- `docs/proposals/rejected/` — proposals that were rejected
+
+This applies to all repositories: aicli, acktng, web, tngdb, and tng-ai.
+
 ## Branch and PR Policy
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
