@@ -8,7 +8,7 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
-- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details. Game lore lives in `acktng/docs/lore/`.
 - **`web/`** — Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
 - **`tngdb/`** — Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
 - **`tng-ai/`** — AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
