@@ -13,7 +13,8 @@ apt-get update -qq
 apt-get install -y -qq \
   build-essential libcrypt-dev zlib1g-dev libssl-dev \
   pkg-config libpq-dev postgresql postgresql-client \
-  clang-format git python3 python3-pip python3-venv 2>&1 | tail -1
+  clang-format git python3 python3-pip python3-venv \
+  python3-psycopg2 python3-yaml 2>&1 | tail -1
 
 # -------------------------------------------------------------------------
 # 2. Ensure PostgreSQL is running
