@@ -8,7 +8,7 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
-- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details. Game lore lives in `acktng/docs/lore/`.
 - **`web/`** — Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
 - **`tngdb/`** — Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
 - **`tng-ai/`** — AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
@@ -38,7 +38,9 @@ Installed automatically by `setup.sh`:
 
 ## Design Proposal Requirement
 
-For any task that is not a bugfix, you MUST first deliver a design proposal describing the proposed changes — including the problem, approach, affected files/repos, and any trade-offs — and discuss it with the user. Do NOT begin implementation until the user has explicitly signed off on the proposal. No code changes, no file creation, no prototyping until approval is given.
+For any task that is not a bugfix, you MUST first deliver a design proposal describing the proposed changes — including the problem, approach, affected files/repos, and any trade-offs — and discuss it with the user. Do NOT begin implementation until the user has explicitly signed off on the proposal. No code changes, no file creation, no prototyping, and no database writes until approval is given.
+
+Querying databases for information to research or write a proposal is permitted. Writing to any database (INSERT, UPDATE, DELETE, or schema changes) is implementation and requires an approved proposal first.
 
 Bugfixes do NOT require a proposal and may be implemented directly.
 
@@ -49,9 +51,15 @@ Proposals live in `docs/proposals/` within the relevant repository:
 
 This applies to all repositories: aicli, acktng, web, tngdb, and tng-ai.
 
+## Model Mode
+
+Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use **Sonnet** mode (`/model sonnet`) when implementing code.
+
 ## Branch and PR Policy
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
+
+Before pushing commits to an existing PR branch, check whether the PR is already merged (`gh pr view`). If it is merged, create a new branch and open a new PR — never push to an already-merged branch.
 
 ## Testing
 
