@@ -36,6 +36,10 @@ Installed automatically by `setup.sh`:
 - `clang-format` — Code formatting/lint checks
 - `git`, `python3`, `python3-pip`, `python3-venv` — Version control, Python runtime, and virtual environments
 
+## Branch and PR Policy
+
+**NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
+
 ## Testing
 
 All tests (unit, integration, etc.) for all sub-projects must be run locally. Never run tests on remote systems or trigger remote CI — always validate locally before pushing.
