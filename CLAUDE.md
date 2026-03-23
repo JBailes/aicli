@@ -59,6 +59,8 @@ Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use *
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
 
+Before pushing commits to an existing PR branch, check whether the PR is already merged (`gh pr view`). If it is merged, create a new branch and open a new PR — never push to an already-merged branch.
+
 ## Testing
 
 All tests (unit, integration, etc.) for all sub-projects must be run locally. Never run tests on remote systems or trigger remote CI — always validate locally before pushing.
