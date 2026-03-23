@@ -51,6 +51,10 @@ Proposals live in `docs/proposals/` within the relevant repository:
 
 This applies to all repositories: aicli, acktng, web, tngdb, and tng-ai.
 
+## Model Mode
+
+Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use **Sonnet** mode (`/model sonnet`) when implementing code.
+
 ## Branch and PR Policy
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
