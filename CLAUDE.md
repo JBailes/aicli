@@ -8,20 +8,22 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
-- **`acktng/`** — The main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details.
-- **`web/`** — Web frontend for the game.
-- **`tngdb/`** — Database tooling and utilities.
-- **`tng-ai/`** — AI/NPC intelligence systems.
+- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`web/`** — Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
+- **`tngdb/`** — Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
+- **`tng-ai/`** — AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
 
 ## Environment Setup
 
 Run `./setup.sh` to set up a complete development environment in one command. It:
 
 1. Installs all system dependencies via apt-get
-2. Starts PostgreSQL (required for integration tests)
+2. Starts PostgreSQL (required for acktng integration tests)
 3. Clones all sub-project repos (skips repos the user lacks access to)
-4. Builds the acktng game server
-5. Runs all acktng tests (unit + integration)
+4. Builds and tests acktng (C build + unit/integration tests)
+5. Runs web tests (Python integration tests)
+6. Creates venv and runs tng-ai tests (pytest)
+7. Creates venv and verifies tngdb imports
 
 ### System Dependencies (Debian/Ubuntu)
 
@@ -32,16 +34,34 @@ Installed automatically by `setup.sh`:
 - `pkg-config`, `libpq-dev` — PostgreSQL client library (game server database backend)
 - `postgresql`, `postgresql-client` — Local PostgreSQL server (required for integration tests)
 - `clang-format` — Code formatting/lint checks
-- `git`, `python3` — Version control and test scripts
+- `git`, `python3`, `python3-pip`, `python3-venv` — Version control, Python runtime, and virtual environments
 
 ## Testing
 
 All tests (unit, integration, etc.) for all sub-projects must be run locally. Never run tests on remote systems or trigger remote CI — always validate locally before pushing.
 
-### acktng tests
+### Running all tests
 
 ```sh
-cd acktng/src
-make lint         # Check formatting
-make unit-tests   # Unit tests + integration tests (requires running PostgreSQL)
+./setup.sh    # runs everything including all tests
 ```
+
+### Running tests individually
+
+```sh
+# acktng
+cd acktng/src && make lint && make unit-tests
+
+# web
+cd web && python3 test_integration.py
+
+# tng-ai
+cd tng-ai && .venv/bin/python -m pytest tests/
+
+# tngdb (no tests — import check only)
+cd tngdb && .venv/bin/python -c "from api.main import app"
+```
+
+### Python virtual environments
+
+`tng-ai/` and `tngdb/` each have their own `.venv/` directory created by `setup.sh`. Always use the project-local venv when running or testing these projects.
