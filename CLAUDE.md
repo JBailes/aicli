@@ -46,11 +46,12 @@ Querying databases for information to research or write a proposal is permitted.
 
 Bugfixes do NOT require a proposal and may be implemented directly.
 
-Proposals live in `wol-docs/proposals/`:
-- `proposals/pending/` — proposals awaiting discussion or approval
-- `proposals/active/` — proposals currently being implemented
-- `proposals/complete/` — proposals that have been fully implemented
-- `proposals/rejected/` — proposals that were rejected
+**All proposals MUST be written to `wol-docs/proposals/`.** This is the canonical location for every proposal. Do not write proposals anywhere else (not in the repo root, not in `wol/`, not in `web/`, etc.).
+
+- `wol-docs/proposals/pending/` — proposals awaiting discussion or approval
+- `wol-docs/proposals/active/` — proposals currently being implemented
+- `wol-docs/proposals/complete/` — proposals that have been fully implemented
+- `wol-docs/proposals/rejected/` — proposals that were rejected
 
 **Exception:** acktng-specific proposals (bugfixes or changes with no effect outside acktng) remain in `acktng/docs/proposals/`.
 
