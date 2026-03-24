@@ -55,6 +55,10 @@ Bugfixes do NOT require a proposal and may be implemented directly.
 
 **Exception:** acktng-specific proposals (bugfixes or changes with no effect outside acktng) remain in `acktng/docs/proposals/`.
 
+## Output Style
+
+Never use em dashes (—) in any output, including prose, comments, commit messages, and documentation. Use a comma, colon, parentheses, or rephrase instead.
+
 ## Model Mode
 
 Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use **Sonnet** mode (`/model sonnet`) when implementing code.
