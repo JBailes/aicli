@@ -8,7 +8,9 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
-- **`acktng/`** — Main MUD game server (C). See `acktng/CLAUDE.md` for build/test/architecture details. Game lore lives in `acktng/docs/lore/`.
+- **`wol/`** — **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
+- **`acktng/`** — Legacy MUD game server (C). Being replaced by `wol/`. See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`wol-docs/`** — Canonical documentation repository for the WOL ecosystem. Game lore lives in `wol-docs/lore/`. Design proposals (except acktng-only) live in `wol-docs/proposals/`.
 - **`web/`** — Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
 - **`tngdb/`** — Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
 - **`tng-ai/`** — AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
@@ -44,12 +46,13 @@ Querying databases for information to research or write a proposal is permitted.
 
 Bugfixes do NOT require a proposal and may be implemented directly.
 
-Proposals live in `docs/proposals/` within the relevant repository:
-- `docs/proposals/open/` — active proposals pending discussion or implementation
-- `docs/proposals/completed/` — proposals that have been fully implemented
-- `docs/proposals/rejected/` — proposals that were rejected
+Proposals live in `wol-docs/proposals/`:
+- `proposals/pending/` — proposals awaiting discussion or approval
+- `proposals/active/` — proposals currently being implemented
+- `proposals/complete/` — proposals that have been fully implemented
+- `proposals/rejected/` — proposals that were rejected
 
-This applies to all repositories: aicli, acktng, web, tngdb, and tng-ai.
+**Exception:** acktng-specific proposals (bugfixes or changes with no effect outside acktng) remain in `acktng/docs/proposals/`.
 
 ## Model Mode
 
@@ -57,7 +60,7 @@ Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use *
 
 ## Branch and PR Policy
 
-**NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (acktng, web, tngdb, tng-ai) and this repo.
+**NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (wol, acktng, web, tngdb, tng-ai) and this repo.
 
 Before pushing commits to an existing PR branch, check whether the PR is already merged (`gh pr view`). If it is merged, create a new branch and open a new PR — never push to an already-merged branch.
 
