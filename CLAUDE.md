@@ -83,6 +83,8 @@ Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use *
 
 **Before EVERY `git push`, you MUST run `gh pr view <branch> --json state` to check whether a PR for that branch is already merged.** This applies even if you created the branch yourself earlier in the same session, even if you just pushed to it minutes ago, and even if you are confident it is not merged. No exceptions, no skipping. If the PR is merged, stop: do not push to that branch. Instead, create a new branch from `origin/main` (fetch first) and open a new PR. Pushing to a merged PR's branch reopens a closed PR and corrupts the review history.
 
+**Before pushing to a PR or creating a PR, check for merge conflicts with `main` and fix them.** Run `git fetch origin` then `git merge origin/main` (or rebase) on your branch. Resolve any conflicts before pushing. Do not open or push to a PR that has merge conflicts.
+
 ## Testing
 
 All tests (unit, integration, etc.) for all sub-projects must be run locally. Never run tests on remote systems or trigger remote CI — always validate locally before pushing.
