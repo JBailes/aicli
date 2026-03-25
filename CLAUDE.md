@@ -21,19 +21,17 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Environment Setup
 
+This repo (aicli) is Claude's local development environment only. It does NOT bootstrap the game infrastructure. Game infrastructure bootstrap scripts live in `wol-docs/infrastructure/bootstrap/`.
+
 Run `./setup.sh` to set up a complete development environment in one command. It:
 
 1. Installs all system dependencies via apt-get
 2. Starts PostgreSQL (required for integration tests)
 3. Clones all sub-project repos (skips repos the user lacks access to)
-4. Builds and tests wol (dotnet build + test)
-5. Creates venv and runs wol-accounts tests (pytest)
-6. Creates venv and runs wol-players tests (pytest)
-7. Creates venv and runs wol-world tests (pytest)
-8. Builds and tests acktng (C build + unit/integration tests)
-9. Runs web tests (Python integration tests)
-10. Creates venv and runs tng-ai tests (pytest)
-11. Creates venv and verifies tngdb imports
+4. Builds and tests acktng (C build + unit/integration tests)
+5. Runs web tests (Python integration tests)
+6. Creates venv and runs tng-ai tests (pytest)
+7. Creates venv and verifies tngdb imports
 
 ### System Dependencies (Debian/Ubuntu)
 
@@ -90,18 +88,6 @@ All tests (unit, integration, etc.) for all sub-projects must be run locally. Ne
 ### Running tests individually
 
 ```sh
-# wol
-cd wol && dotnet test
-
-# wol-accounts
-cd wol-accounts && .venv/bin/python -m pytest tests/
-
-# wol-players
-cd wol-players && .venv/bin/python -m pytest tests/
-
-# wol-world
-cd wol-world && .venv/bin/python -m pytest tests/
-
 # acktng
 cd acktng/src && make lint && make unit-tests
 
@@ -117,4 +103,4 @@ cd tngdb && .venv/bin/python -c "from api.main import app"
 
 ### Python virtual environments
 
-`wol-accounts/`, `wol-players/`, `wol-world/`, `tng-ai/`, and `tngdb/` each have their own `.venv/` directory created by `setup.sh`. Always use the project-local venv when running or testing these projects.
+`tng-ai/` and `tngdb/` each have their own `.venv/` directory created by `setup.sh`. Always use the project-local venv when running or testing these projects.
