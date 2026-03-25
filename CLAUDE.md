@@ -81,7 +81,7 @@ Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use *
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (wol, acktng, web, tngdb, tng-ai) and this repo.
 
-**Before every push to an existing branch, you MUST run `gh pr view <branch>` to check whether the PR is already merged.** If it is merged, stop — do not push to that branch. Instead, create a new branch from the current main and open a new PR. Pushing to a merged PR branch corrupts the git history and bypasses review. No exceptions.
+**Before EVERY `git push`, you MUST run `gh pr view <branch> --json state` to check whether a PR for that branch is already merged.** This applies even if you created the branch yourself earlier in the same session, even if you just pushed to it minutes ago, and even if you are confident it is not merged. No exceptions, no skipping. If the PR is merged, stop: do not push to that branch. Instead, create a new branch from `origin/main` (fetch first) and open a new PR. Pushing to a merged PR's branch reopens a closed PR and corrupts the review history.
 
 ## Testing
 
