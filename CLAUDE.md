@@ -8,12 +8,19 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
+### WOL (active project)
+
+Repos with `wol` in the name are part of the WOL project. Repos with `tng` or `ack` in the name are legacy and NOT part of WOL.
+
 - **`wol/`** -- **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
 - **`wol-accounts/`** -- Account authentication and identity API (Python/FastAPI/asyncpg). Manages accounts, sessions, and login. Private network service.
 - **`wol-players/`** -- Player character API (Python/FastAPI/asyncpg). Manages character identity and progression (name, race, class, level, experience). Private network service.
 - **`wol-world/`** -- World prototype data API (Python/FastAPI/asyncpg). Manages areas, rooms, exits, object prototypes, NPC prototypes, resets, shops, loot, and scripts. Private network service.
 - **`wol-client/`** -- Game client (Dart/Flutter). Login and connect flow over WebSocket.
 - **`wol-docs/`** -- Canonical documentation repository for the WOL ecosystem. Game lore lives in `wol-docs/lore/`. Design proposals (except acktng-only) live in `wol-docs/proposals/`.
+
+### Legacy (not part of WOL)
+
 - **`acktng/`** -- Legacy MUD game server (C). Being replaced by `wol/`. See `acktng/CLAUDE.md` for build/test/architecture details.
 - **`web/`** -- Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
 - **`tngdb/`** -- Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
