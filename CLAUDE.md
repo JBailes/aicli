@@ -8,24 +8,32 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 ## Sub-Projects
 
-- **`wol/`** — **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
-- **`acktng/`** — Legacy MUD game server (C). Being replaced by `wol/`. See `acktng/CLAUDE.md` for build/test/architecture details.
-- **`wol-docs/`** — Canonical documentation repository for the WOL ecosystem. Game lore lives in `wol-docs/lore/`. Design proposals (except acktng-only) live in `wol-docs/proposals/`.
-- **`web/`** — Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
-- **`tngdb/`** — Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
-- **`tng-ai/`** — AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
+- **`wol/`** -- **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
+- **`wol-accounts/`** -- Account authentication and identity API (Python/FastAPI/asyncpg). Manages accounts, sessions, and login. Private network service.
+- **`wol-players/`** -- Player character API (Python/FastAPI/asyncpg). Manages character identity and progression (name, race, class, level, experience). Private network service.
+- **`wol-world/`** -- World prototype data API (Python/FastAPI/asyncpg). Manages areas, rooms, exits, object prototypes, NPC prototypes, resets, shops, loot, and scripts. Private network service.
+- **`wol-client/`** -- Game client (Dart/Flutter). Login and connect flow over WebSocket.
+- **`wol-docs/`** -- Canonical documentation repository for the WOL ecosystem. Game lore lives in `wol-docs/lore/`. Design proposals (except acktng-only) live in `wol-docs/proposals/`.
+- **`acktng/`** -- Legacy MUD game server (C). Being replaced by `wol/`. See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`web/`** -- Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
+- **`tngdb/`** -- Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
+- **`tng-ai/`** -- AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
 
 ## Environment Setup
 
 Run `./setup.sh` to set up a complete development environment in one command. It:
 
 1. Installs all system dependencies via apt-get
-2. Starts PostgreSQL (required for acktng integration tests)
+2. Starts PostgreSQL (required for integration tests)
 3. Clones all sub-project repos (skips repos the user lacks access to)
-4. Builds and tests acktng (C build + unit/integration tests)
-5. Runs web tests (Python integration tests)
-6. Creates venv and runs tng-ai tests (pytest)
-7. Creates venv and verifies tngdb imports
+4. Builds and tests wol (dotnet build + test)
+5. Creates venv and runs wol-accounts tests (pytest)
+6. Creates venv and runs wol-players tests (pytest)
+7. Creates venv and runs wol-world tests (pytest)
+8. Builds and tests acktng (C build + unit/integration tests)
+9. Runs web tests (Python integration tests)
+10. Creates venv and runs tng-ai tests (pytest)
+11. Creates venv and verifies tngdb imports
 
 ### System Dependencies (Debian/Ubuntu)
 
@@ -82,6 +90,18 @@ All tests (unit, integration, etc.) for all sub-projects must be run locally. Ne
 ### Running tests individually
 
 ```sh
+# wol
+cd wol && dotnet test
+
+# wol-accounts
+cd wol-accounts && .venv/bin/python -m pytest tests/
+
+# wol-players
+cd wol-players && .venv/bin/python -m pytest tests/
+
+# wol-world
+cd wol-world && .venv/bin/python -m pytest tests/
+
 # acktng
 cd acktng/src && make lint && make unit-tests
 
@@ -91,10 +111,10 @@ cd web && python3 test_integration.py
 # tng-ai
 cd tng-ai && .venv/bin/python -m pytest tests/
 
-# tngdb (no tests — import check only)
+# tngdb (no tests, import check only)
 cd tngdb && .venv/bin/python -c "from api.main import app"
 ```
 
 ### Python virtual environments
 
-`tng-ai/` and `tngdb/` each have their own `.venv/` directory created by `setup.sh`. Always use the project-local venv when running or testing these projects.
+`wol-accounts/`, `wol-players/`, `wol-world/`, `tng-ai/`, and `tngdb/` each have their own `.venv/` directory created by `setup.sh`. Always use the project-local venv when running or testing these projects.
