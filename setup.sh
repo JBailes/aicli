@@ -60,80 +60,7 @@ for entry in "${REPOS[@]}"; do
 done
 
 # -------------------------------------------------------------------------
-# 4. Build and test wol
-# -------------------------------------------------------------------------
-if [ -f "$SCRIPT_DIR/wol/Wol.Server/Wol.Server.csproj" ]; then
-  echo "==> Building wol..."
-  cd "$SCRIPT_DIR/wol"
-  dotnet build -c Release -q
-  echo "   Build complete."
-
-  echo "==> Running wol tests..."
-  dotnet test -q
-  echo "   wol tests passed."
-else
-  echo "==> Skipping wol (repo not cloned)"
-fi
-
-# -------------------------------------------------------------------------
-# 5. Set up and test wol-accounts
-# -------------------------------------------------------------------------
-if [ -d "$SCRIPT_DIR/wol-accounts/api" ]; then
-  echo "==> Setting up wol-accounts..."
-  cd "$SCRIPT_DIR/wol-accounts"
-  if [ ! -d .venv ]; then
-    python3 -m venv .venv
-  fi
-  .venv/bin/pip install -q -r requirements.txt
-  .venv/bin/pip install -q "pytest>=8.0.0" "httpx>=0.27.0" "pytest-asyncio>=0.24.0"
-
-  echo "==> Running wol-accounts tests..."
-  .venv/bin/python -m pytest tests/ -q
-  echo "   wol-accounts tests passed."
-else
-  echo "==> Skipping wol-accounts (repo not cloned or no api/ directory)"
-fi
-
-# -------------------------------------------------------------------------
-# 6. Set up and test wol-players
-# -------------------------------------------------------------------------
-if [ -d "$SCRIPT_DIR/wol-players/api" ]; then
-  echo "==> Setting up wol-players..."
-  cd "$SCRIPT_DIR/wol-players"
-  if [ ! -d .venv ]; then
-    python3 -m venv .venv
-  fi
-  .venv/bin/pip install -q -r requirements.txt
-  .venv/bin/pip install -q "pytest>=8.0.0" "httpx>=0.27.0" "pytest-asyncio>=0.24.0"
-
-  echo "==> Running wol-players tests..."
-  .venv/bin/python -m pytest tests/ -q
-  echo "   wol-players tests passed."
-else
-  echo "==> Skipping wol-players (repo not cloned or no api/ directory)"
-fi
-
-# -------------------------------------------------------------------------
-# 7. Set up and test wol-world
-# -------------------------------------------------------------------------
-if [ -d "$SCRIPT_DIR/wol-world/api" ]; then
-  echo "==> Setting up wol-world..."
-  cd "$SCRIPT_DIR/wol-world"
-  if [ ! -d .venv ]; then
-    python3 -m venv .venv
-  fi
-  .venv/bin/pip install -q -r requirements.txt
-  .venv/bin/pip install -q "pytest>=8.0.0" "httpx>=0.27.0" "pytest-asyncio>=0.24.0"
-
-  echo "==> Running wol-world tests..."
-  .venv/bin/python -m pytest tests/ -q
-  echo "   wol-world tests passed."
-else
-  echo "==> Skipping wol-world (repo not cloned or no api/ directory)"
-fi
-
-# -------------------------------------------------------------------------
-# 8. Build and test acktng
+# 4. Build and test acktng
 # -------------------------------------------------------------------------
 if [ -d "$SCRIPT_DIR/acktng/src" ]; then
   echo "==> Building acktng..."
@@ -149,7 +76,7 @@ else
 fi
 
 # -------------------------------------------------------------------------
-# 9. Test web
+# 5. Test web
 # -------------------------------------------------------------------------
 if [ -d "$SCRIPT_DIR/web" ]; then
   echo "==> Running web tests..."
@@ -161,7 +88,7 @@ else
 fi
 
 # -------------------------------------------------------------------------
-# 10. Set up and test tng-ai
+# 6. Set up and test tng-ai
 # -------------------------------------------------------------------------
 if [ -d "$SCRIPT_DIR/tng-ai" ]; then
   echo "==> Setting up tng-ai..."
@@ -180,7 +107,7 @@ else
 fi
 
 # -------------------------------------------------------------------------
-# 11. Set up tngdb (no tests, verify import only)
+# 7. Set up tngdb (no tests, verify import only)
 # -------------------------------------------------------------------------
 if [ -d "$SCRIPT_DIR/tngdb/api" ]; then
   echo "==> Setting up tngdb..."
