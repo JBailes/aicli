@@ -12,7 +12,8 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 Repos with `wol` in the name are part of the WOL project. Repos with `tng` or `ack` in the name are legacy and NOT part of WOL.
 
-- **`wol/`** -- **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
+- **`wol/`** -- Stateless connection interface (C#/.NET). Handles telnet, TLS telnet, WS, and WSS protocols on port 6969. Passes game traffic between clients and the realm. Calls API services directly on the private network. Designed for horizontal autoscaling.
+- **`wol-realm/`** -- Game engine (C#/.NET). Runs the MUD world simulation (rooms, NPCs, combat, ticks, game logic). Internal-only service on the private network.
 - **`wol-accounts/`** -- Account authentication and identity API (Python/FastAPI/asyncpg). Manages accounts, sessions, and login. Private network service.
 - **`wol-players/`** -- Player character API (Python/FastAPI/asyncpg). Manages character identity and progression (name, race, class, level, experience). Private network service.
 - **`wol-world/`** -- World prototype data API (Python/FastAPI/asyncpg). Manages areas, rooms, exits, object prototypes, NPC prototypes, resets, shops, loot, and scripts. Private network service.
