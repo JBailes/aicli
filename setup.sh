@@ -30,6 +30,7 @@ echo "   PostgreSQL is online."
 # -------------------------------------------------------------------------
 REPOS=(
   "wol git@github.com:JBailes/wol.git"
+  "wol-realm git@github.com:JBailes/wol-realm.git"
   "wol-accounts git@github.com:JBailes/wol-accounts.git"
   "wol-players git@github.com:JBailes/wol-players.git"
   "wol-world git@github.com:JBailes/wol-world.git"

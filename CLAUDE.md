@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This repository is the development environment for the ACK!TNG ecosystem. It contains multiple sub-projects as independent git repositories, each ignored by this parent repo's git.
+This repository is the development environment for the ACKmud ecosystem. It contains multiple sub-projects as independent git repositories, each ignored by this parent repo's git.
 
 ## Sub-Projects
 
@@ -12,7 +12,8 @@ This repository is the development environment for the ACK!TNG ecosystem. It con
 
 Repos with `wol` in the name are part of the WOL project. Repos with `tng` or `ack` in the name are legacy and NOT part of WOL.
 
-- **`wol/`** -- **New MUD game server (C#). This is the primary target for all server development. WOL is replacing acktng.**
+- **`wol/`** -- Stateless connection interface (C#/.NET). Handles telnet, TLS telnet, WS, and WSS on port 6969. Routes game traffic between clients and the realm.
+- **`wol-realm/`** -- Game engine (C#/.NET). Runs the MUD world simulation: rooms, NPCs, combat, ticks, and game logic. Internal-only service on the private network.
 - **`wol-accounts/`** -- Account authentication and identity API (Python/FastAPI/asyncpg). Manages accounts, sessions, and login. Private network service.
 - **`wol-players/`** -- Player character API (Python/FastAPI/asyncpg). Manages character identity and progression (name, race, class, level, experience). Private network service.
 - **`wol-world/`** -- World prototype data API (Python/FastAPI/asyncpg). Manages areas, rooms, exits, object prototypes, NPC prototypes, resets, shops, loot, and scripts. Private network service.
@@ -21,8 +22,8 @@ Repos with `wol` in the name are part of the WOL project. Repos with `tng` or `a
 
 ### Legacy (not part of WOL)
 
-- **`acktng/`** -- Legacy MUD game server (C). Being replaced by `wol/`. See `acktng/CLAUDE.md` for build/test/architecture details.
-- **`web/`** -- Web frontend (Python). Serves the ackmud.com and aha.ackmud.com sites. Pure stdlib HTTP server, no framework dependencies.
+- **`acktng/`** -- Legacy MUD game server (C). Being replaced by WOL. See `acktng/CLAUDE.md` for build/test/architecture details.
+- **`web/`** -- Web frontend for ackmud.com and aha.ackmud.com (Blazor WASM + nginx + ASP.NET Core API).
 - **`tngdb/`** -- Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
 - **`tng-ai/`** -- AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
 
@@ -34,7 +35,7 @@ Run `./setup.sh` to set up a complete development environment in one command. It
 
 1. Installs all system dependencies via apt-get
 2. Starts PostgreSQL (required for integration tests)
-3. Clones all sub-project repos (skips repos the user lacks access to)
+3. Clones all sub-project repos (skips repos the user lacks access to): wol, wol-realm, wol-accounts, wol-players, wol-world, wol-client, wol-docs, acktng, web, tngdb, tng-ai
 4. Builds and tests acktng (C build + unit/integration tests)
 5. Runs web tests (Python integration tests)
 6. Creates venv and runs tng-ai tests (pytest)
