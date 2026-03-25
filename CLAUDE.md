@@ -73,6 +73,10 @@ Bugfixes do NOT require a proposal and may be implemented directly.
 
 Never use em dashes (—) in any output, including prose, comments, commit messages, and documentation. Use a comma, colon, parentheses, or rephrase instead.
 
+## Commit Authorship
+
+Do NOT add "Co-Authored-By", "Generated with Claude Code", or any other AI attribution lines to commits or PRs. The user is the sole author.
+
 ## Model Mode
 
 Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use **Sonnet** mode (`/model sonnet`) when implementing code.
