@@ -88,6 +88,10 @@ Do NOT add "Co-Authored-By", "Generated with Claude Code", or any other AI attri
 
 Use **Opus** mode (`/model opus`) when writing plans and design proposals. Use **Sonnet** mode (`/model sonnet`) when implementing code.
 
+## Deployment Policy
+
+Never suggest quick fixes, manual commands, or workarounds to apply directly on live hosts. All changes must go through the full cycle: push to a branch, create a PR, merge, then pull and deploy from the merged code. No exceptions.
+
 ## Branch and PR Policy
 
 **NEVER push directly to main on any repository. All changes must go through a branch and pull request — no exceptions.** This applies to all sub-projects (wol, acktng, web, tngdb, tng-ai) and this repo.
