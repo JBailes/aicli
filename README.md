@@ -26,12 +26,19 @@ cd aicli
 | `wol-client/` | Game client (login and connect flow over WebSocket) | Dart/Flutter |
 | `wol-docs/` | Canonical documentation: lore, proposals, infrastructure | Markdown |
 
+### Web
+
+| Directory | Description | Tests |
+|-----------|-------------|-------|
+| `web-wol/` | WOL website for ackmud.com (Blazor WASM + ASP.NET Core host) | `dotnet test WolWeb.sln` |
+| `web-tng/` | ACK Historical Archive for aha.ackmud.com (Blazor WASM + ASP.NET Core API) | `dotnet test AckWeb.sln` |
+| `web-personal/` | Personal website for bailes.us (React + Vite SPA) | `npm test` |
+
 ### Legacy (not part of WOL)
 
 | Directory | Description | Tests |
 |-----------|-------------|-------|
 | `acktng/` | Legacy MUD game server being replaced by WOL | `cd src && make unit-tests` |
-| `web/` | Web frontend for ackmud.com and aha.ackmud.com (Blazor WASM + nginx) | `python3 test_integration.py` |
 | `tng-ai/` | AI/NPC intelligence service (Groq-backed) | `.venv/bin/python -m pytest tests/` |
 | `tngdb/` | Read-only HTTP API for game content | import check only |
 

@@ -36,8 +36,10 @@ REPOS=(
   "wol-world git@github.com:JBailes/wol-world.git"
   "wol-client git@github.com:JBailes/wol-client.git"
   "wol-docs git@github.com:JBailes/wol-docs.git"
+  "web-wol git@github.com:JBailes/web-wol.git"
+  "web-tng git@github.com:JBailes/web-tng.git"
+  "web-personal git@github.com:JBailes/web-personal.git"
   "acktng git@github.com:ackmudhistoricalarchive/acktng.git"
-  "web git@github.com:ackmudhistoricalarchive/web.git"
   "tngdb git@github.com:ackmudhistoricalarchive/tngdb.git"
   "tng-ai git@github.com:ackmudhistoricalarchive/tng-ai.git"
 )
@@ -77,15 +79,42 @@ else
 fi
 
 # -------------------------------------------------------------------------
-# 5. Test web
+# 5. Install .NET 9 SDK and test web projects
 # -------------------------------------------------------------------------
-if [ -d "$SCRIPT_DIR/web" ]; then
-  echo "==> Running web tests..."
-  cd "$SCRIPT_DIR/web"
-  python3 test_integration.py
-  echo "   web tests passed."
+if ! command -v dotnet &>/dev/null || ! dotnet --list-sdks | grep -q "^9\."; then
+  echo "==> Installing .NET 9 SDK..."
+  curl -fsSL https://dot.net/v1/dotnet-install.sh | bash -s -- \
+    --channel 9.0 \
+    --install-dir /usr/local/dotnet
+  ln -sf /usr/local/dotnet/dotnet /usr/local/bin/dotnet
+fi
+
+if [ -d "$SCRIPT_DIR/web-tng" ]; then
+  echo "==> Running web-tng tests..."
+  cd "$SCRIPT_DIR/web-tng"
+  dotnet test AckWeb.sln --configuration Release
+  echo "   web-tng tests passed."
 else
-  echo "==> Skipping web (repo not cloned)"
+  echo "==> Skipping web-tng (repo not cloned)"
+fi
+
+if [ -d "$SCRIPT_DIR/web-wol" ]; then
+  echo "==> Running web-wol tests..."
+  cd "$SCRIPT_DIR/web-wol"
+  dotnet test WolWeb.sln --configuration Release
+  echo "   web-wol tests passed."
+else
+  echo "==> Skipping web-wol (repo not cloned)"
+fi
+
+if [ -d "$SCRIPT_DIR/web-personal" ]; then
+  echo "==> Running web-personal tests..."
+  cd "$SCRIPT_DIR/web-personal"
+  npm install --silent
+  npm test
+  echo "   web-personal tests passed."
+else
+  echo "==> Skipping web-personal (repo not cloned)"
 fi
 
 # -------------------------------------------------------------------------
