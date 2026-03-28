@@ -19,10 +19,15 @@ Repos with `wol` in the name are part of the WOL project. Repos with `tng` or `a
 - **`wol-client/`** -- Game client (Dart/Flutter). Login and connect flow over WebSocket.
 - **`wol-docs/`** -- Canonical documentation repository for the WOL ecosystem. Game lore lives in `wol-docs/lore/`. Design proposals (except acktng-only) live in `wol-docs/proposals/`.
 
+### Web
+
+- **`web-wol/`** -- WOL website for ackmud.com (C#/.NET Blazor WASM + ASP.NET Core host with /health). Served by Kestrel on wol-web (CT 209).
+- **`web-tng/`** -- ACK Historical Archive website for aha.ackmud.com (C#/.NET Blazor WASM + ASP.NET Core API). Includes /who, /gsgp, /reference endpoints and /health check. Served by Kestrel on ack-web (CT 247).
+- **`web-personal/`** -- Personal website for bailes.us (React + Vite SPA). Served by static file server on personal-web (CT 117).
+
 ### Legacy (not part of WOL)
 
 - **`acktng/`** -- Legacy MUD game server (C). Being replaced by WOL. See `acktng/CLAUDE.md` for build/test/architecture details.
-- **`web/`** -- Web frontend for ackmud.com and aha.ackmud.com (Blazor WASM + nginx + ASP.NET Core API).
 - **`tngdb/`** -- Database API server (Python/FastAPI/asyncpg). Read-only HTTP API for game content. No tests currently.
 - **`tng-ai/`** -- AI/NPC intelligence service (Python/FastAPI/Groq). API for AI-powered NPC responses.
 
@@ -34,11 +39,14 @@ Run `./setup.sh` to set up a complete development environment in one command. It
 
 1. Installs all system dependencies via apt-get
 2. Starts PostgreSQL (required for integration tests)
-3. Clones all sub-project repos (skips repos the user lacks access to): wol, wol-realm, wol-accounts, wol-players, wol-world, wol-client, wol-docs, acktng, web, tngdb, tng-ai
-4. Builds and tests acktng (C build + unit/integration tests)
-5. Runs web tests (Python integration tests)
-6. Creates venv and runs tng-ai tests (pytest)
-7. Creates venv and verifies tngdb imports
+3. Clones all sub-project repos (skips repos the user lacks access to): wol, wol-realm, wol-accounts, wol-players, wol-world, wol-client, wol-docs, web-wol, web-tng, web-personal, acktng, tngdb, tng-ai
+4. Installs .NET 9 SDK (for web-wol and web-tng)
+5. Builds and tests acktng (C build + unit/integration tests)
+6. Builds and tests web-tng (dotnet test)
+7. Builds and tests web-wol (dotnet test)
+8. Builds and tests web-personal (npm test)
+9. Creates venv and runs tng-ai tests (pytest)
+10. Creates venv and verifies tngdb imports
 
 ### System Dependencies (Debian/Ubuntu)
 
@@ -104,8 +112,14 @@ All tests (unit, integration, etc.) for all sub-projects must be run locally. Ne
 # acktng
 cd acktng/src && make lint && make unit-tests
 
-# web
-cd web && python3 test_integration.py
+# web-tng
+cd web-tng && dotnet test AckWeb.sln
+
+# web-wol
+cd web-wol && dotnet test WolWeb.sln
+
+# web-personal
+cd web-personal && npm test
 
 # tng-ai
 cd tng-ai && .venv/bin/python -m pytest tests/
