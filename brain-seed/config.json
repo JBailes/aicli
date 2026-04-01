@@ -1,0 +1,8 @@
+{
+  "workspaces": [
+    { "name": "aicli", "path": "__AICLI_DIR__" }
+  ],
+  "conversationDirs": [
+    "~/.claude/projects/-root-aicli"
+  ]
+}
